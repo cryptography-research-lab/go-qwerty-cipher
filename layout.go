@@ -62,3 +62,23 @@ func init() {
 }
 
 // ------------------------------------------------ ---------------------------------------------------------------------
+
+// QwertzKeyboardLayout_Germany qwertz布局键盘的加密映射表（德国）
+var QwertzKeyboardLayout_Germany KeyboardLayout
+
+// QwertzKeyboardLayoutDecrypt_Germany qwertz布局键盘的解密映射表（德国）
+var QwertzKeyboardLayoutDecrypt_Germany KeyboardLayout
+
+func init() {
+
+	QwertzKeyboardLayout_Germany = make([]rune, 26)
+	layout := "QWERTZUIOPASDFGHJKLYXCVBNM"
+	for index, character := range layout {
+		QwertzKeyboardLayout_Germany[index] = character
+	}
+
+	QwertzKeyboardLayoutDecrypt_Germany = QwertzKeyboardLayout_Germany.TransformToDecrypt()
+
+}
+
+// ------------------------------------------------ ---------------------------------------------------------------------
