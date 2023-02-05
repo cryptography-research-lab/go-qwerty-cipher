@@ -4,13 +4,13 @@ import variable_parameter "github.com/golang-infrastructure/go-variable-paramete
 
 // Encrypt 对明文进行加密
 // 支持指定自定义的键盘布局，如果不指定的话默认使用QWERTY
-func Encrypt(plaintext string, table ...KeyboardLayoutTable) (string, error) {
+func Encrypt(plaintext string, keyboardLayout ...KeyboardLayout) (string, error) {
 
 	// 未指定键盘布局时使用qwerty布局的键盘
-	table = variable_parameter.SetDefaultParam(table, QwertyKeyboardLayoutTable)
+	keyboardLayout = variable_parameter.SetDefaultParam(keyboardLayout, QwertyKeyboardLayout)
 
 	// 参数校验
-	if err := table[0].check(); err != nil {
+	if err := keyboardLayout[0].check(); err != nil {
 		return "", err
 	}
 
@@ -22,7 +22,7 @@ func Encrypt(plaintext string, table ...KeyboardLayoutTable) (string, error) {
 			resultSlice[index] = character
 		} else {
 			// 字母的话做个映射
-			mappingTo := table[0][character-'A']
+			mappingTo := keyboardLayout[0][character-'A']
 			resultSlice[index] = mappingTo
 		}
 	}
@@ -31,10 +31,10 @@ func Encrypt(plaintext string, table ...KeyboardLayoutTable) (string, error) {
 }
 
 // Decrypt 对密文解密，需要传入解密使用的表
-func Decrypt(ciphertext string, keyboardLayoutDecryptTable ...KeyboardLayoutTable) (string, error) {
+func Decrypt(ciphertext string, keyboardLayoutDecryptTable ...KeyboardLayout) (string, error) {
 
 	// 未指定键盘布局时使用qwerty布局的键盘
-	keyboardLayoutDecryptTable = variable_parameter.SetDefaultParam(keyboardLayoutDecryptTable, QwertyKeyboardLayoutDecryptTable)
+	keyboardLayoutDecryptTable = variable_parameter.SetDefaultParam(keyboardLayoutDecryptTable, QwertyKeyboardLayoutDecrypt)
 
 	return Encrypt(ciphertext, keyboardLayoutDecryptTable...)
 }
