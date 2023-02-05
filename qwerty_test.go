@@ -1,15 +1,17 @@
 package qwerty_cipher
 
 import (
-	"fmt"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestEncrypt(t *testing.T) {
 	plaintext := "helloworld"
-	encrypt := Encrypt(plaintext)
-	fmt.Println(encrypt)
+	encrypt, err := Encrypt(plaintext)
+	assert.Nil(t, err)
+	assert.Equal(t, "ITSSGVGKSR", encrypt)
 
-	decrypt := Decrypt(encrypt)
-	fmt.Println(decrypt)
+	decrypt, err := Decrypt(encrypt)
+	assert.Nil(t, err)
+	assert.Equal(t, "HELLOWORLD", decrypt)
 }
