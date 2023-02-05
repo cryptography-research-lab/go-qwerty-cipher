@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	keywordLayout := qwerty_cipher.QwertzKeyboardLayout_Germany
+	keywordLayout := qwerty_cipher.QwertzKeyboardLayout
 
 	// 对明文加密
 	plaintext := "helloworld"

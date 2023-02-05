@@ -63,21 +63,41 @@ func init() {
 
 // ------------------------------------------------ ---------------------------------------------------------------------
 
-// QwertzKeyboardLayout_Germany qwertz布局键盘的加密映射表（德国）
-var QwertzKeyboardLayout_Germany KeyboardLayout
+// QwertzKeyboardLayout qwertz布局键盘的加密映射表
+var QwertzKeyboardLayout KeyboardLayout
 
-// QwertzKeyboardLayoutDecrypt_Germany qwertz布局键盘的解密映射表（德国）
-var QwertzKeyboardLayoutDecrypt_Germany KeyboardLayout
+// QwertzKeyboardLayoutDecrypt qwertz布局键盘的解密映射表
+var QwertzKeyboardLayoutDecrypt KeyboardLayout
 
 func init() {
 
-	QwertzKeyboardLayout_Germany = make([]rune, 26)
+	QwertzKeyboardLayout = make([]rune, 26)
 	layout := "QWERTZUIOPASDFGHJKLYXCVBNM"
 	for index, character := range layout {
-		QwertzKeyboardLayout_Germany[index] = character
+		QwertzKeyboardLayout[index] = character
 	}
 
-	QwertzKeyboardLayoutDecrypt_Germany = QwertzKeyboardLayout_Germany.TransformToDecrypt()
+	QwertzKeyboardLayoutDecrypt = QwertzKeyboardLayout.TransformToDecrypt()
+
+}
+
+// ------------------------------------------------ ---------------------------------------------------------------------
+
+// AzertyKeyboardLayout qwertz布局键盘的加密映射表
+var AzertyKeyboardLayout KeyboardLayout
+
+// AzertyKeyboardLayoutDecrypt qwertz布局键盘的解密映射表
+var AzertyKeyboardLayoutDecrypt KeyboardLayout
+
+func init() {
+
+	AzertyKeyboardLayout = make([]rune, 26)
+	layout := "AZERTYUIOPQSDFGHJKLMWXCVBN"
+	for index, character := range layout {
+		AzertyKeyboardLayout[index] = character
+	}
+
+	AzertyKeyboardLayoutDecrypt = AzertyKeyboardLayout.TransformToDecrypt()
 
 }
 
