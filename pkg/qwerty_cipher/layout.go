@@ -1,6 +1,7 @@
 package qwerty_cipher
 
 // KeyboardLayout 表示一个键盘布局，这个布局可以是任意布局，只要是确定了映射关系就可以了
+// 具体的例子详见 QwertyKeyboardLayout 实现
 type KeyboardLayout []rune
 
 // 检查当前的键盘布局映射表是否合法
@@ -11,12 +12,12 @@ func (x KeyboardLayout) check() error {
 		return ErrKeyboardLayoutCharacterInvalid
 	}
 
-	// 然后统计每个字符的出现次数
+	// 然后统计每个字符的出现次数，每个字符都必须出现，并且只能出现一次
 	characterCountSlice := make([]int, 26)
 	for _, character := range x {
-		character = toUppercaseIfNeed(character)
-		mappingToIndex := character - 'A'
-		if mappingToIndex >= 26 {
+		mappingToIndex := toMappingIndex(character)
+		// 给定的字符必须在有效范围
+		if mappingToIndex >= 26 || mappingToIndex < 0 {
 			return ErrKeyboardLayoutCharacterInvalid
 		}
 		characterCountSlice[mappingToIndex]++
@@ -33,10 +34,10 @@ func (x KeyboardLayout) check() error {
 // TransformToDecrypt 将加密表转换为解密表
 func (x KeyboardLayout) TransformToDecrypt() KeyboardLayout {
 	decryptTable := make([]rune, len(x))
-	for index, toCharacter := range x {
-		fromCharacter := rune('A' + index)
-		toIndex := toCharacter - 'A'
-		decryptTable[toIndex] = fromCharacter
+	for index, fromCharacter := range x {
+		toCharacter := rune('A' + index)
+		fromIndex := toMappingIndex(fromCharacter)
+		decryptTable[fromIndex] = toCharacter
 	}
 	return decryptTable
 }
@@ -64,6 +65,7 @@ func init() {
 // ------------------------------------------------ ---------------------------------------------------------------------
 
 // QwertzKeyboardLayout qwertz布局键盘的加密映射表
+// 维基百科： https://zh.wikipedia.org/zh-cn/QWERTZ%E9%8D%B5%E7%9B%A4
 var QwertzKeyboardLayout KeyboardLayout
 
 // QwertzKeyboardLayoutDecrypt qwertz布局键盘的解密映射表
@@ -83,7 +85,7 @@ func init() {
 
 // ------------------------------------------------ ---------------------------------------------------------------------
 
-// AzertyKeyboardLayout qwertz布局键盘的加密映射表
+// AzertyKeyboardLayout Azerty布局键盘的加密映射表
 var AzertyKeyboardLayout KeyboardLayout
 
 // AzertyKeyboardLayoutDecrypt qwertz布局键盘的解密映射表
