@@ -6,12 +6,12 @@ import (
 )
 
 func TestEncrypt(t *testing.T) {
-	plaintext := "helloworld"
+	plaintext := "HelloWorld"
 	encrypt, err := Encrypt(plaintext)
 	assert.Nil(t, err)
-	assert.Equal(t, "ITSSGVGKSR", encrypt)
+	assert.Equal(t, "ItssgVgksr", encrypt)
 
 	decrypt, err := Decrypt(encrypt)
 	assert.Nil(t, err)
-	assert.Equal(t, "HELLOWORLD", decrypt)
+	assert.Equal(t, plaintext, decrypt)
 }
