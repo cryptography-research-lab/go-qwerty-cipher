@@ -26,7 +26,7 @@ func init() {
 
 var encryptCmd = &cobra.Command{
 	Use:   "encrypt",
-	Short: "",
+	Short: "Encrypt plaintext using qwerty encryption algorithm",
 	Long:  ``,
 	RunE: func(cmd *cobra.Command, args []string) error {
 
