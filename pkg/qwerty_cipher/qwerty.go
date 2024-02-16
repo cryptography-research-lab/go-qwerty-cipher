@@ -10,7 +10,7 @@ func Encrypt(plaintext string, keyboardLayout ...KeyboardLayout) (string, error)
 	keyboardLayout = variable_parameter.SetDefaultParam(keyboardLayout, QwertyKeyboardLayout)
 
 	// 参数校验
-	if err := keyboardLayout[0].check(); err != nil {
+	if err := keyboardLayout[0].Check(); err != nil {
 		return "", err
 	}
 

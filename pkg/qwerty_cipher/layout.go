@@ -4,8 +4,8 @@ package qwerty_cipher
 // 具体的例子详见 QwertyKeyboardLayout 实现
 type KeyboardLayout []rune
 
-// 检查当前的键盘布局映射表是否合法
-func (x KeyboardLayout) check() error {
+// Check 检查当前的键盘布局映射表是否合法
+func (x KeyboardLayout) Check() error {
 
 	// 如果长度都不对，则没必要继续下去了
 	if len(x) != 26 {
